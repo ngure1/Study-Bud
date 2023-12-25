@@ -6,8 +6,6 @@ Study Buddy is a Django-based web application that facilitates group discussions
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - **User Authentication:** Users can sign up, log in, and manage their profiles.
@@ -27,6 +25,9 @@ Study Buddy is a Django-based web application that facilitates group discussions
 2. Create a virtual environment:
     ```bash
     python -m venv venv
+    ```
+    ```or bash
+    virtualenv venv    
     ```
 
 3. Activate the virtual environment:
@@ -68,9 +69,4 @@ Study Buddy is a Django-based web application that facilitates group discussions
 4. Contribute to discussions by sending messages.
 5. Enjoy collaborative studying with Study Buddy!
 
-## Contributing
-Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) when submitting pull requests.
-
-## License
-This project is licensed under the [MIT License](LICENSE).
 
