@@ -13,9 +13,11 @@ def home(request):
     Q(host__username__icontains=q)
     )
   topics=models.Topic.objects.all()
+  room_count=rooms.count()
   context={
     'rooms':rooms,
-    'topics':topics 
+    'topics':topics,
+    'room_count':room_count 
            }
   return render(request, 'base/home.html', context)
 
