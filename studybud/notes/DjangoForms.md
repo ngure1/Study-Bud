@@ -1,8 +1,8 @@
 # Table of contents
-- [Django Form](#djangoforms)
-- [Django Model Form](#djangoModelForms)
+- [Django Forms](#django-forms)
+- [Django Model Forms](#django-model-forms)
 
-## Django Form
+## Django Forms
 Django form provides a form class which is used to create HTML forms.
 It is similar to model forms but unlike model forms which makes forms based off the fields in the model the user has the liberty to choose the fields they would like in the form.
 Each field maps to the ``HTML`` input element each of which is a class itself, it manages form data and performs validation while submiting the form.
@@ -36,7 +36,7 @@ In the created ``forms.py`` file
 |DateTimeField|date time input|
 |DecimalField|number input|
 
-## Django Model Form
+## Django Model Forms
 It is a class that us used to create a html form using the model.
 **Example**<br>
 In your app's ``models.py``
