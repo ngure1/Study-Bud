@@ -10,7 +10,7 @@ This is a project I embarked on while in my second year of study at ``JKUAT`` to
 - [Installation](#installation)
 - [Usage](#usage)
 - [Notes](#notes)
-    - [Django forms](./notes/DjangoForms)
+    - [Django forms](./notes/DjangoForms.md)
         - [CRUD operations with forms](./notes/crud.md)
         - [Searching & Filtering](./notes/searchingandfiltering.md/)
 
@@ -79,7 +79,7 @@ This is a project I embarked on while in my second year of study at ``JKUAT`` to
 
 ## Notes
 In this notes section I will be taking you through some of the steps I went thruough in impelementation of the feartures and the things I also learnt.Brace yourself for a qonderful experience and be ready to learn with me
-1. [Django forms](./notes/DjangoForms)
+1. [Django forms](./notes/DjangoForms.md)
     1. [CRUD operations](./notes/crud.md)
     1. [Searching & Filtering](./notes/searchingandfiltering.md/)
 
