@@ -2,10 +2,17 @@
 
 Study Buddy is a Django-based web application that facilitates group discussions on various topics. Users can create rooms, join discussions, and contribute to conversations on specific study topics.
 
+### Brief intro
+This is a project I embarked on while in my second year of study at ``JKUAT`` to teach myself backend web development using django
+
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Notes](#notes)
+    - [Django forms](./notes/DjangoForms)
+        - [CRUD operations with forms](./notes/crud.md)
+        - [Searching & Filtering](./notes/searchingandfiltering.md/)
 
 ## Features
 - **User Authentication:** Users can sign up, log in, and manage their profiles.
@@ -70,4 +77,11 @@ Study Buddy is a Django-based web application that facilitates group discussions
 4. Contribute to discussions by sending messages.
 5. Enjoy collaborative studying with Study Buddy!
 
+## Notes
+In this notes section I will be taking you through some of the steps I went thruough in impelementation of the feartures and the things I also learnt.Brace yourself for a qonderful experience and be ready to learn with me
+1. [Django forms](./notes/DjangoForms)
+    1. [CRUD operations](./notes/crud.md)
+    1. [Searching & Filtering](./notes/searchingandfiltering.md/)
 
+Credits to ``@Denis Ivy`` and ``@Traversy Media`` for their wonderful course 
+You can checkout the course for yourself on their [Youtube Django Course](https://www.youtube.com/watch?v=PtQiiknWUcI&t=8432s)
