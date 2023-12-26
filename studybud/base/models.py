@@ -14,6 +14,10 @@ class Rooms(models.Model):
 
   class Meta:
     ordering=['-updated','-created']
+    verbose_name="Room"
+    verbose_name_plural="Rooms"
+    db_table="Room Table"
+
   
   def __str__(self):
     return self.name
@@ -24,12 +28,19 @@ class Messages(models.Model):
   body=models.TextField()
   updated=models.DateTimeField(auto_now_add=True)
   created=models.DateTimeField(auto_now=True)
+  class Meta:
+    verbose_name="Message"
+    verbose_name_plural="Messages"
 
   def __str__(self):
-    return self.body
+    return "@"+str(self.user.username) +" "+ self.body[0:10]
 
 class Topic(models.Model):
   name=models.CharField(max_length=200)
 
   def __str__(self):
     return self.name
+  
+  class Meta:
+    verbose_name="Topic"
+    verbose_name_plural="Topics"
