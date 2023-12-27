@@ -1,11 +1,29 @@
-from django.shortcuts import render,redirect,HttpResponse
-from . import models
-from . import forms
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import render,redirect,HttpResponse
+
+from . import models
+from . import forms
+
+def signUp(request):
+  form = forms.signUp()
+  if request.method=='POST':
+    username=request.POST.get('username')
+    try:
+      models.User.objects.get(username=username)
+      messages.warning(request,"Username is already taken")
+    except ObjectDoesNotExist:
+      form=forms.signUp(request.POST)
+      if form.is_valid:
+        form.save()
+        return redirect('login')
+  context={'form':form}
+  return render(request,'base/signUp.html',context)
+
 
 def loginView(request):
 
@@ -50,6 +68,7 @@ def home(request):
            }
   return render(request, 'base/home.html', context)
 
+@login_required(login_url='login')
 def room(request,pk):
   room=models.Rooms.objects.get(id=pk)
   context={'room':room}

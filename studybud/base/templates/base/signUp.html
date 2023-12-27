@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+<form method="POST" action="">
+  {% csrf_token %}
+  {%for field in form %}
+  <div>
+    <label for="">{{field.label}}</label>
+    {{field}}
+  </div>
+  {% endfor %}
+  <input type="submit" value="SignUp">
+</form>
+<span>Already have an account <a href="{% url 'login' %}">Login</a></span>
+{% endblock content %}
