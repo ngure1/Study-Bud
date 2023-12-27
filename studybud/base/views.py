@@ -1,12 +1,16 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from . import models
 from . import forms
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from django.db.models import Q
 
 def loginView(request):
+
+  if request.user.is_authenticated:
+    return redirect('home')
   if request.method =='POST':
     username=request.POST.get('username')
     password=request.POST.get('password')
@@ -23,9 +27,13 @@ def loginView(request):
       messages.error(request,"Username or password does not exist")
   context={}
   return render(request , 'base/login.html', context)
+
+
 def logoutView(request):
   logout(request)
   return redirect ('home')
+
+
 def home(request):
   q=request.GET.get('q') if request.GET.get('q') != None else ''
   rooms=models.Rooms.objects.filter(
@@ -46,7 +54,8 @@ def room(request,pk):
   room=models.Rooms.objects.get(id=pk)
   context={'room':room}
   return render(request,'base/room.html',context)
-  
+
+@login_required(login_url='login')
 def createRoom(request):
   form=forms.RoomsForm()
   if request.method == 'POST':
@@ -56,9 +65,15 @@ def createRoom(request):
       return redirect('home')
   context={'form':form}
   return render(request,'base/createroom.html',context)
+
+@login_required(login_url='login')
 def updateRoom(request,pk):
   room =models.Rooms.objects.get(id=pk)
   form=forms.RoomsForm(instance=room)
+
+  if request.user != room.host:
+    return HttpResponse('You are not allowed here')
+  
   if request.method=='POST':
     form=forms.RoomsForm(request.POST,instance=room)
     if form.is_valid:
@@ -67,8 +82,13 @@ def updateRoom(request,pk):
   context={'form':form}
   return render(request, 'base/createroom.html',context)
 
+@login_required(login_url='login')
 def deleteRoom(request,pk):
   room=models.Rooms.objects.get(id=pk)
+
+  if request.user != room.host:
+    return HttpResponse('You are not allowed here')
+  
   if request.method=="POST":
     room.delete()
     return redirect ('home')
