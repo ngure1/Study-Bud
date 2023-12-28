@@ -2,5 +2,28 @@
 {% block content %}
 
 <h1>{{ room.name }}</h1>
+<div class="wrapper">
+  <div class="convo-container">
+    <div class="messages">
+      {% for message in room_message %}
+        <div>
+          <small>
+            {%if request.user == message.user %}
+              <a href="{% url 'deletemessage' message.id %}">Delete</a>
+            {% endif %}
+            @ {{ message.user.username|capfirst }} 
+            {{ message.created|timesince }}
+          </small>
+          <p>{{ message.body }}</p>
+        </div>
+        <hr>
+      {% endfor %}
+    </div>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input name="body" type="text">
+    </form>
+  </div>
+</div>
 
 {% endblock %}

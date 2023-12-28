@@ -36,7 +36,6 @@ def loginView(request):
       user=User.objects.get(username=username)
     except:
       messages.error(request,"User does not exist")
-      # return redirect('create accout')
     user=authenticate(request,username=username,password=password)
     if user is not None:
       login(request,user)
@@ -71,7 +70,18 @@ def home(request):
 @login_required(login_url='login')
 def room(request,pk):
   room=models.Rooms.objects.get(id=pk)
-  context={'room':room}
+  room_message=room.messages_set.all()
+  if request.method=='POST':
+    room_message=models.Messages.objects.create(
+      user=request.user,
+      room=room,
+      body=request.POST.get('body')
+    )
+    return redirect('room',pk=room.id)
+  context={
+    'room':room,
+    'room_message':room_message
+    }
   return render(request,'base/room.html',context)
 
 @login_required(login_url='login')
@@ -112,3 +122,13 @@ def deleteRoom(request,pk):
     room.delete()
     return redirect ('home')
   return render(request ,'base/delete.html',{'obj':room})
+
+def deleteMessage(request,pk):
+  message=models.Messages.objects.get(id=pk)
+  if request.user != message.user:
+    return HttpResponse('You cannot delete this message')
+  if request.method =='POST':
+    room=message.room
+    message.delete()
+    return redirect('room',pk=room.id)
+  return render(request,'base/delete.html',{'obj':message.body})
