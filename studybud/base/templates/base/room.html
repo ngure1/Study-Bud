@@ -1,6 +1,11 @@
 {% extends 'main.html'%}
 {% block content %}
-
+<style>
+  .wrapper{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+</style>
 <h1>{{ room.name }}</h1>
 <div class="wrapper">
   <div class="convo-container">
@@ -23,6 +28,13 @@
       {% csrf_token %}
       <input name="body" type="text">
     </form>
+  </div>
+  <div>
+    Participants
+    <hr>
+    {% for user in participants %}
+      <p>@{{user.username}}</p>
+    {% endfor %}
   </div>
 </div>
 
