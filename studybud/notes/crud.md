@@ -6,7 +6,7 @@
 - [Delete](#delete)
 
 ## What is CRUD?
-CRUD is an acronym for Create Read Update and Delete.
+CRUD is an acronym for Create Read Update and Delete.<br>
 Crud functionalities allow users to iteract with the database without necessarily having to use the django admin site
 
 ## Create
@@ -48,14 +48,14 @@ class Room(models.Model):
 ``forms.py``
 ```py
 from django.forms import ModelForm
-from models import Rooms
+from models import Room
 #creating a roomform with all rields included
 class RoomForm(ModelForm):
   class Meta:
-    model = Rooms
+    model = Room
     fields = '__all__' 
 ```
-The difference between the two forms is that when we use the model forms we have the option to do operations such as ``form.is_valid`` and ``form.save()`` however when we use our own forms we dont have such methods although i will later show you how we can get the best of both words by allowing ourselves to have those methods and the form stiil be user created
+The difference between the two forms is that when we use the model forms we have the option to do operations such as ``form.is_valid`` and ``form.save()`` however when we use our own forms we dont have such methods although I will later show you how we can get the best of both words by allowing ourselves to have those methods and the form stiil be user created<br>
 Most of the logic behind it will be handled in the ``views.py``.<br>
 - If you use manually created forms:
 ```py
@@ -65,14 +65,15 @@ from django.shortcuts import render,redirect
 
 def createRoom(request):
   if request.method=='POST':
-    room=Room.object.create(
+    room=Room.objects.create(
       host = request.POST.get('host')
       topic = request.POST.get('topic')
       name = request.POST.get('name')
       description = request.POST.get('description')
     )
-    Room.add(room)
+    room.save()
     return redirect('home.html')
+  return render (request,'create_room_form.html')
 ```
 - If you use model forms:
 ```py
@@ -81,7 +82,7 @@ from django.shortcuts import render,redirect
 
 def createRoom(request):
   #instanciate the form with empty fields
-  from=RoomForm()
+  form=RoomForm()
   #check if the user clicked submit
   if request.method=='POST':
     #initialise the formwith the data the user entered in the input field
@@ -95,3 +96,35 @@ def createRoom(request):
   context={'form':form}
   return render(request, 'yourtemplate.html',context)
 ```
+### How to get the both of both worlds
+How this will work is that we use a model form but when rendering the form we create a user form but without input fields we will render the input fields from the model form
+```html
+<form method="POST" action="">
+  {{form.label}}
+  {{form.host}}
+</form>
+```
+
+## Read
+To read you just have to render the room objects in the templates.<br>
+- Querry all the room objects in the views
+- Render them in the template 
+
+```python
+def readRooms(request):
+  rooms=Room.objects.all()
+  context={'rooms':rooms}
+  return render(request,'RoomRenderingTemplate',context)
+```
+In the template
+```html
+{% for room in rooms %}
+<small>@{{room.host}}</small>
+{{room.topic}}
+{{room.name}}
+{{room.description}}
+<hr>
+{% endfor %}
+```
+
+## Update
