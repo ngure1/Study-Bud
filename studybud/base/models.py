@@ -31,6 +31,7 @@ class Messages(models.Model):
   class Meta:
     verbose_name="Message"
     verbose_name_plural="Messages"
+    ordering=['-updated','-created']
 
   def __str__(self):
     return "@"+str(self.user.username) +" "+ self.body[0:10]

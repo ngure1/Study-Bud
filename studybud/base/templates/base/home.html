@@ -3,7 +3,7 @@
 <style>
   .page-container{
     display: grid;
-    grid-template-columns: .5fr 3fr;
+    grid-template-columns: .5fr 3fr 1fr;
     column-gap: 10px;
   }
 </style>
@@ -34,6 +34,17 @@
         </div>
         
     {% endfor %}
+    </div>
+    <div class="activity-feed">
+      <h5>Acrivity-feed</h5>
+      <hr>
+      
+      {% for message in room_messages %}
+      <small>@{{ message.user }} {{message.created|timesince}}</small>
+      <p>
+        {{message.body}}
+      </p>
+      {% endfor %}
     </div>
   </div>
   

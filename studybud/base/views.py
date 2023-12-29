@@ -58,12 +58,14 @@ def home(request):
     Q(name__icontains=q) |
     Q(host__username__icontains=q)
     )
+  room_messages=models.Messages.objects.all()
   topics=models.Topic.objects.all()
   room_count=rooms.count()
   context={
     'rooms':rooms,
     'topics':topics,
-    'room_count':room_count 
+    'room_count':room_count ,
+    'room_messages':room_messages
            }
   return render(request, 'base/home.html', context)
 
