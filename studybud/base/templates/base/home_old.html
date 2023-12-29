@@ -1,0 +1,28 @@
+{% extends 'main.html'%}
+{% block content %}
+<style>
+  .page-container{
+    display: grid;
+    grid-template-columns: .5fr 3fr 1fr;
+    column-gap: 10px;
+  }
+</style>
+<h1>Home Template</h1>
+<div>
+  <div class="page-container">
+    <div class="sidebar">
+     {% include 'base/browse_topics_component.html'%}
+    </div>
+    <div>
+      <p><strong>{{room_count}} Rooms Available</strong> </p>
+      <a href="{% url 'createroom' %}">Create New A Room</a>
+      {%include 'base/rooms_component.html'%}
+    </div>
+    <div class="activity-feed">
+      {% include 'base/activity_component.html'%}
+    </div>
+  </div>
+  
+  
+</div>
+{% endblock %}
