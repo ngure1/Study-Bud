@@ -1,0 +1,6 @@
+Browse Topics
+<hr>
+<a href="{% url 'home' %}">All rooms </a>
+{% for topic in topics %}
+  <a href="{% url 'home' %}?q={{topic.name}}"><p>{{topic.name}}</p></a>
+{% endfor %}

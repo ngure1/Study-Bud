@@ -11,12 +11,7 @@
 <div>
   <div class="page-container">
     <div class="sidebar">
-      Browse Topics
-      <hr>
-      <a href="{% url 'home' %}">All rooms </a>
-      {% for topic in topics %}
-        <a href="{% url 'home' %}?q={{topic.name}}"><p>{{topic.name}}</p></a>
-      {% endfor %}
+     {% include 'base/browse_topics_component.html'%}
     </div>
     <div>
       <p><strong>{{room_count}} Rooms Available</strong> </p>
@@ -36,15 +31,7 @@
     {% endfor %}
     </div>
     <div class="activity-feed">
-      <h5>Acrivity-feed</h5>
-      <hr>
-      
-      {% for message in room_messages %}
-      <small>@{{ message.user }} {{message.created|timesince}}</small>
-      <p>
-        {{message.body}}
-      </p>
-      {% endfor %}
+      {% include 'base/activity_component.html'%}
     </div>
   </div>
   
