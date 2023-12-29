@@ -7,6 +7,7 @@ class RoomsForm(ModelForm):
   class Meta:
     model=models.Rooms
     fields='__all__'
+    exclude=['host','participants']
 
 
 class signUp(UserCreationForm):
